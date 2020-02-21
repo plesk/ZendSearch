@@ -13,7 +13,7 @@
  */
 error_reporting( E_ALL | E_STRICT );
 
-$phpUnitVersion = PHPUnit_Runner_Version::id();
+$phpUnitVersion = PHPUnit\Runner\Version::id();
 if ('@package_version@' !== $phpUnitVersion && version_compare($phpUnitVersion, '3.5.0', '<')) {
     echo 'This version of PHPUnit (' . PHPUnit_Runner_Version::id() . ') is not supported in Zend Framework 2.x unit tests.' . PHP_EOL;
     exit(1);
