@@ -11,7 +11,6 @@
 namespace ZendSearchTest\Lucene;
 
 use ZendSearch\Lucene;
-use Zend\Search;
 
 /**
  * @category   Zend
@@ -19,7 +18,7 @@ use Zend\Search;
  * @subpackage UnitTests
  * @group      Zend_Search_Lucene
  */
-class AbstractFSMTest extends \PHPUnit_Framework_TestCase
+class AbstractFSMTest extends \PHPUnit\Framework\TestCase
 {
     public function testCreate()
     {
