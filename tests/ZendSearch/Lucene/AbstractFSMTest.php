@@ -11,7 +11,6 @@
 namespace ZendSearchTest\Lucene;
 
 use ZendSearch\Lucene;
-use Zend\Search;
 
 /**
  * @category   Zend

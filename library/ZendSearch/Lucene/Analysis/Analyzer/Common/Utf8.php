@@ -13,7 +13,7 @@ namespace ZendSearch\Lucene\Analysis\Analyzer\Common;
 use ZendSearch\Lucene;
 use ZendSearch\Lucene\Analysis;
 use ZendSearch\Lucene\Exception\RuntimeException;
-use Zend\Stdlib\ErrorHandler;
+use Laminas\Stdlib\ErrorHandler;
 
 /**
  * @category   Zend

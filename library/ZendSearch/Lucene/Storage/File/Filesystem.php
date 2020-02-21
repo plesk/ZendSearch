@@ -11,7 +11,7 @@
 namespace ZendSearch\Lucene\Storage\File;
 
 use ZendSearch\Lucene;
-use Zend\Stdlib\ErrorHandler;
+use Laminas\Stdlib\ErrorHandler;
 
 /**
  * @category   Zend
