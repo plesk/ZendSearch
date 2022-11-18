@@ -195,13 +195,10 @@ class Filesystem implements DirectoryInterface
         }
         unset($this->_fileHandlers[$filename]);
 
-        global $php_errormsg;
-        $trackErrors = ini_get('track_errors'); ini_set('track_errors', '1');
         if (!@unlink($this->_dirPath . '/' . $filename)) {
-            ini_set('track_errors', $trackErrors);
-            throw new Lucene\Exception\RuntimeException('Can\'t delete file: ' . $php_errormsg);
+            $message = error_get_last()['message'] ?? 'Unknown error';
+            throw new Lucene\Exception\RuntimeException('Can\'t delete file: ' . $message);
         }
-        ini_set('track_errors', $trackErrors);
     }
 
     /**
@@ -271,8 +268,6 @@ class Filesystem implements DirectoryInterface
      */
     public function renameFile($from, $to)
     {
-        global $php_errormsg;
-
         if (isset($this->_fileHandlers[$from])) {
             $this->_fileHandlers[$from]->close();
         }
@@ -291,18 +286,13 @@ class Filesystem implements DirectoryInterface
             }
         }
 
-        $trackErrors = ini_get('track_errors');
-        ini_set('track_errors', '1');
-
         ErrorHandler::start(E_WARNING);
         $success = rename($this->_dirPath . '/' . $from, $this->_dirPath . '/' . $to);
         ErrorHandler::stop();
         if (!$success) {
-            ini_set('track_errors', $trackErrors);
-            throw new Lucene\Exception\RuntimeException($php_errormsg);
+            $message = error_get_last()['message'] ?? 'Unknown error';
+            throw new Lucene\Exception\RuntimeException($message);
         }
-
-        ini_set('track_errors', $trackErrors);
 
         return $success;
     }

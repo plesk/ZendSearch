@@ -38,24 +38,18 @@ class Filesystem extends AbstractFile
      */
     public function __construct($filename, $mode='r+b')
     {
-        global $php_errormsg;
-
         if (strpos($mode, 'w') === false  &&  !is_readable($filename)) {
             // opening for reading non-readable file
             throw new Lucene\Exception\InvalidArgumentException('File \'' . $filename . '\' is not readable.');
         }
 
-        $trackErrors = ini_get('track_errors');
-        ini_set('track_errors', '1');
-
         $this->_fileHandle = @fopen($filename, $mode);
 
         if ($this->_fileHandle === false) {
-            ini_set('track_errors', $trackErrors);
-            throw new Lucene\Exception\RuntimeException($php_errormsg);
+            $message = error_get_last()['message'] ?? 'Unknown error';
+            throw new Lucene\Exception\RuntimeException($message);
         }
 
-        ini_set('track_errors', $trackErrors);
     }
 
     /**
