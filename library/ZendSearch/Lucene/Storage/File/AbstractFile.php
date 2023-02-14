@@ -76,6 +76,10 @@ abstract class AbstractFile implements FileInterface
     {
         $str = $this->_fread(4);
 
+        if ('' === $str) {
+            return 0;
+        }
+
         return  ord($str[0]) << 24 |
                 ord($str[1]) << 16 |
                 ord($str[2]) << 8  |
