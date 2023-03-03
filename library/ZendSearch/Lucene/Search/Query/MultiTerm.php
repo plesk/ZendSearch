@@ -457,7 +457,9 @@ class MultiTerm extends AbstractQuery
              * We don't need to check that term freq is not 0
              * Score calculation is performed only for matched docs
              */
-            $score += $reader->getSimilarity()->tf($this->_termsFreqs[$termId][$docId]) *
+            $freq = isset($this->_termsFreqs[$termId][$docId]) ? $this->_termsFreqs[$termId][$docId] : 0;
+
+            $score += $reader->getSimilarity()->tf($freq) *
                       $this->_weights[$termId]->getValue() *
                       $reader->norm($docId, $term->field);
         }
